@@ -1,0 +1,25 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: keycloak-auth
+  # Security Configuration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/MySuperApplicationRealm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+# JWT Configuration
+jwt:
+  auth:
+    converter:
+      resource-id: my-super-client
+      principal-attribute: principal_username
+
+# Logging Configuration
+logging:
+  level:
+    org.springframework.security: DEBUG
